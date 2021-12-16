@@ -40,6 +40,8 @@ public class PersonajeController {
 		}
 		return new ResponseEntity<List<Personaje>>(HttpStatus.NOT_FOUND);
 	}
+	
+	//estoy probando
 
 	@GetMapping("/cargar/{nombre}")
 	public ResponseEntity<Personaje> cargaParaEditar(@PathVariable String nombre) {
