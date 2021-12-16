@@ -1,6 +1,7 @@
 package com.alkemy.web.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,29 @@ public class ReinoServiceImpl {
 		return null;
 	}
 	
+	public Reino nuevoReino(Reino reino) {
+		if(reino != null) {
+			return rr.save(reino);
+		}
+		return null;
+	}
 	
+	public Reino cargarParaeditarReino(Integer id) {
+		Optional<Reino> reinodb = rr.findById(id);
+		if(reinodb.isPresent()) {
+			return reinodb.get();
+		}
+		return null;
+	}
+	
+	public Reino eliminarReino(Integer id) {
+		Optional<Reino> reinodb = rr.findById(id);
+		if(reinodb.isPresent()) {
+			rr.delete(reinodb.get());
+			return reinodb.get();
+		}
+		return null;
+	}
 	
 	
 }

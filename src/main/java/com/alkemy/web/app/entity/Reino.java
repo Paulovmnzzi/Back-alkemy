@@ -20,7 +20,7 @@ public class Reino {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name = "id_region")
-	private Integer idRegion;
+	private Integer idReino;
 
 	@Column(name = "nombre", unique = true, nullable = false)
 	private String nombre;
@@ -34,6 +34,15 @@ public class Reino {
 	public Reino() {
 		super();
 	}
+
+	public Reino(Integer idReino, String nombre, String imagen, Set<Casa> casas) {
+		super();
+		this.idReino = idReino;
+		this.nombre = nombre;
+		this.imagen = imagen;
+		this.casas = casas;
+	}
+
 
 	public Reino(String nombre, String imagen, Set<Casa> casas) {
 		super();

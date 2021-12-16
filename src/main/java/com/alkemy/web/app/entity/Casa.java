@@ -44,6 +44,14 @@ public class Casa {
 		this.reino = reino;
 	}
 
+	public Casa(String nombre, String imagen, String historia, List<Personaje> personajes) {
+		super();
+		this.nombre = nombre;
+		this.imagen = imagen;
+		this.historia = historia;
+		this.personajes = personajes;
+	}
+
 	public Reino getReino() {
 		return reino;
 	}
