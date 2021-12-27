@@ -15,10 +15,10 @@ public class ReinoServiceImpl {
 	@Autowired
 	private ReinoRepository rr;
 	
+	
 	public List<Reino> findAll() {
 		return rr.findAll();
 	}
-
 	
 	public Reino findByNombre(String nombre) {
 		if(nombre != null){

@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "casas")
 public class Casa {
@@ -24,10 +26,11 @@ public class Casa {
 	@Column(nullable = true, unique = true, length = 1000)
 	private String historia;
 
-//	@JsonIgnore
-	@OneToMany(mappedBy = "casa")
+	@JsonIgnoreProperties(value = "casa")
+	@OneToMany(mappedBy = "casa")								//el mappedBy indica que es una relación bidireccional ya que una casa también tiene personajes, como un personaje una casa.
 	private List<Personaje> personajes = new ArrayList<Personaje>();
 
+	@JsonIgnoreProperties(value = "casas")
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id_region", name = "reino", nullable = false)
 	private Reino reino;

@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "personajes")
@@ -24,9 +24,9 @@ public class Personaje {
 	@Column(nullable = true, unique = true, length = 3000)
 	private String historia;
 
-	@JsonIgnore
+	@JsonIgnoreProperties(value = "personajes") 				//que ignore los peronsajes cuando traiga los datos de la casa, para evitar un bucle infinito.
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "nombre", name = "casa")
+	@JoinColumn(referencedColumnName = "nombre", name = "casa")	//referenced se vincula con el atributo de la Clase Casa. Mientras que name es como se llamará en la bd.
 	private Casa casa;
 
 	public Personaje() {

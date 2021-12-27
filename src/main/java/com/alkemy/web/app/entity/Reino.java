@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "reinos")
@@ -27,7 +27,7 @@ public class Reino {
 
 	private String imagen;
 
-	@JsonIgnore
+	@JsonIgnoreProperties(value = "reino")
 	@OneToMany(mappedBy = "reino")
 	private Set<Casa> casas = new HashSet<Casa>();
 
@@ -43,12 +43,19 @@ public class Reino {
 		this.casas = casas;
 	}
 
-
 	public Reino(String nombre, String imagen, Set<Casa> casas) {
 		super();
 		this.nombre = nombre;
 		this.imagen = imagen;
 		this.casas = casas;
+	}
+
+	public Integer getIdReino() {
+		return idReino;
+	}
+
+	public void setIdReino(Integer idReino) {
+		this.idReino = idReino;
 	}
 
 	public String getNombre() {

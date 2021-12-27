@@ -17,48 +17,47 @@ public class CasaServiceImpl {
 
 	@Autowired
 	private CasaRepository cr;
-	
+
 	@Autowired
 	private ReinoRepository rr;
-	
-	public List<Casa> obtenerCasas(){
+
+	public List<Casa> obtenerCasas() {
 		return cr.findAll();
 	}
-	
+
 	public Casa findCasaByNombre(String nombre) {
 		return cr.findByNombre(nombre);
 	}
-	
+
 	public Casa save(Casa casa, Integer nombreReino) {
 		Optional<Reino> reinoOp = rr.findById(nombreReino);
-		
-		if(casa != null && reinoOp.isPresent()) {
+
+		if (casa != null && reinoOp.isPresent()) {
 			Reino reino = reinoOp.get();
 			casa.setReino(reino);
 			return cr.save(casa);
 		}
 		return null;
 	}
-	
-	
-	public List<Casa> findByReino(String nombreReino){
-		if(nombreReino != null) {
+
+	public List<Casa> findByReino(String nombreReino) {
+		if (nombreReino != null) {
 			Reino reino = rr.findByNombre(nombreReino);
 			List<Casa> casas = new ArrayList<Casa>();
-			if(reino != null) {
-				for(Casa casa: reino.getCasas()) {
+			if (reino != null) {
+				for (Casa casa : reino.getCasas()) {
 					casas.add(new Casa(casa.getNombre(), casa.getImagen(), casa.getHistoria(), casa.getPersonajes()));
 				}
-				if(casas != null) {
+				if (casas != null) {
 					return casas;
 				}
 			}
 		}
 		return null;
 	}
-	
+
 	public Casa editarCasa(Casa casa) {
-		if( casa != null) {
+		if (casa != null) {
 			Casa oldCasa = cr.findByNombre(casa.getNombre());
 			Casa newCasa = casa;
 			newCasa.setReino(oldCasa.getReino());
@@ -66,18 +65,39 @@ public class CasaServiceImpl {
 		}
 		return null;
 	}
-	
+
 	public Casa removeCasa(String nombreCasa) {
 		Casa casa = cr.findByNombre(nombreCasa);
-		if(casa != null) {
+		if (casa != null) {
 			cr.delete(casa);
 			return casa;
 		}
 		return null;
 	}
-	
-	
-	
-	
-	
+
+	public List<Casa> findByReinoId(Integer reinoId) {
+		
+		if(reinoId != null) {
+			Optional<Reino> reinoOp = rr.findById(reinoId);
+			List<Casa> casas = new ArrayList<Casa>();
+			if(reinoOp.isPresent()) {
+				Reino reino = reinoOp.get();
+				for(Casa casa : reino.getCasas()) {
+					casas.add(new Casa(casa.getNombre(), casa.getImagen(), casa.getHistoria(), casa.getPersonajes()));
+				}
+				if(casas != null && !casas.isEmpty()) {
+					return casas;
+				}
+			}
+		}
+		return null;
+	}
+		
+		
+		
+		
+		
+		
+
+
 }
