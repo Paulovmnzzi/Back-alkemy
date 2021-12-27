@@ -57,7 +57,6 @@ public class CasasController {
 		}
 		response.put("error", "Los datos ingresados no son correctos");
 		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.BAD_REQUEST);
-
 	}
 
 	@GetMapping("/buscar/reino/{reino}")
